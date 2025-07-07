@@ -1,0 +1,108 @@
+networks:
+  prueba-tecnica-network:
+    driver: bridge
+
+volumes:
+  postgres-data-pt:
+
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data-pt:/var/lib/postgresql/data
+      - ./init-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - prueba-tecnica-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - prueba-tecnica-network
+
+  discovery-microservice:
+    image: discovery-microservice
+    build:
+      context: ./discovery-microservice
+    ports:
+      - "8790:8790"
+    networks:
+      - prueba-tecnica-network
+
+  gateway-microservice:
+    image: gateway-microservice
+    build:
+      context: ./gateway-microservice
+    ports:
+      - "8810:8810"
+    depends_on:
+      - discovery-microservice
+    networks:
+      - prueba-tecnica-network
+    env_file: .env
+
+  user-microservice:
+    image: user-microservice
+    build:
+      context: ./user-microservice
+    ports:
+      - "8811:8811"
+    depends_on:
+      - postgres
+      - discovery-microservice
+      - gateway-microservice
+    networks:
+      - prueba-tecnica-network
+    env_file: .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/user_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET: ${SECRET}
+      EXP_TIME: ${EXP_TIME}
+
+  giftcard-microservice:
+    image: giftcard-microservice
+    build:
+      context: ./giftcard-microservice
+    ports:
+      - "8812:8812"
+    depends_on:
+      - postgres
+      - rabbitmq
+      - discovery-microservice
+      - gateway-microservice
+    networks:
+      - prueba-tecnica-network
+    env_file: .env
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/giftcard_db
+      SPRING_R2DBC_USERNAME: ${POSTGRES_USER}
+      SPRING_R2DBC_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/giftcard_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+      SECRET: ${SECRET}
+      EXP_TIME: ${EXP_TIME}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRED_TIME: ${JWT_EXPIRED_TIME}

@@ -1,0 +1,89 @@
+# --- JAVA / MAVEN / GRADLE / SPRING BOOT ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Gradle
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+**/out/
+
+# --- FRONTEND (Angular, React, Vue, etc) ---
+node_modules/
+dist/
+# Si tu frontend está en una carpeta específica:
+frontend-prueba-tecnica/node_modules/
+frontend-prueba-tecnica/dist/
+frontend-prueba-tecnica/.angular/cache/
+frontend-prueba-tecnica/.angular/webpack/
+frontend-prueba-tecnica/.env
+frontend-prueba-tecnica/.env.*
+
+# --- IDEs ---
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# --- OS / Misc ---
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Others ---
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+
+# --- test and coverage files ---
+coverage/
+frontend-prueba-tecnica/coverage/
+reports/
+*.tgz
+
+# --- Docker ---
+**/docker-compose.override.yml
+**/.docker/
+
+# --- Sonar ---
+.sonar/
+sonar-report.json
+
+# --- Misc tools ---
+/*.tar.gz
+*.zip
+
+# --- Monorepo extra patterns (if any workspace or packages structure) ---
+packages/*/node_modules/
+packages/*/dist/
+
+# END
