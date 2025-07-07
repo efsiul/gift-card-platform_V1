@@ -1,0 +1,796 @@
+{
+	"info": {
+		"_postman_id": "dc963f10-1676-4ce4-84a8-63ee81e5b213",
+		"name": "GrupoExito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11094294"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"efsiul\",\r\n  \"password\": \"nCxlPaIbkkiL8xdK\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/login",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"efsiul\",\r\n  \"email\": \"felipe.cadavid@udea.edu.co\",\r\n  \"password\": \"password123\",\r\n  \"enabled\": true,\r\n  \"roles\": [1, 2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/registro",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"TECHNICAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/roles",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/me",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"felipe.cadavid@udea.edu.co\",\r\n    \"enabled\": true,\r\n    \"roles\": [\r\n        1,2\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/2",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-role-to-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"felipe.cadavid@udea.edu.co\",\r\n  \"roleName\": \"TECHNICAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/add-role-to-user?userId=2&roleId=3",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"add-role-to-user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "roleId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-role-to-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/remove-role-to-user?userId=2&roleId=3",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"remove-role-to-user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "roleId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}/USER-MICROSERVICE/pt-lfc/api/v1/usuarios/2",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"USER-MICROSERVICE",
+								"pt-lfc",
+								"api",
+								"v1",
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gift-Card",
+			"item": [
+				{
+					"name": "create-giftcard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"GCARD-0004\",\r\n  \"amount\": 150000,\r\n  \"creationDate\":\"2025-07-07T23:59:59\",\r\n  \"expirationDate\": \"2025-12-31T23:59:59\",\r\n  \"status\": \"CREATED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "giftcard-list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "giftcard-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "giftcard-by-code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/by-code/GCARD-0001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"by-code",
+								"GCARD-0001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8812/ping",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "giftcard-update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"GCARD-0001\",\r\n    \"amount\": 150000.00,\r\n    \"expirationDate\": [2025, 12, 31, 23, 59, 59]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "giftcard-delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emite-giftcard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/1/emit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"1",
+								"emit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "redeem-giftcard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/1/redeem?userId=1&amount=50000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"1",
+								"redeem"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "amount",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block-giftcard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"GCARD-0003\",\r\n  \"amount\": 150000,\r\n  \"expirationDate\": \"2025-12-31T23:59:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8812/pt-lfc/api/v1/giftcards/3/block?reason=fraude",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8812",
+							"path": [
+								"pt-lfc",
+								"api",
+								"v1",
+								"giftcards",
+								"3",
+								"block"
+							],
+							"query": [
+								{
+									"key": "reason",
+									"value": "fraude"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8810",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZnNpdWwiLCJyb2xlcyI6WyJBRE1JTiIsIlVTRVIiXSwiZXhwIjoxNzUyNzYxMzMyfQ.V7eiCSvqAEe23jZ7HpVwRVplCiOVBZjA0Ao56pb2ugE",
+			"type": "string"
+		}
+	]
+}
