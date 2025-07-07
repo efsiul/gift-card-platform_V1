@@ -2,6 +2,14 @@
 
 Este proyecto está estructurado como un **monorepo** que integra varios microservicios de backend en SpringBoot y un frontend Angular para la gestión de usuarios y gift cards. Incluye toda la lógica para pruebas y despliegue local rápido, usando Docker Compose para la infraestructura principal.
 
+## Respuesta a planteamiento de prueba técnica
+
+para el almacenamiento de Archivo tipo S3, se me ocurre desacoplar el almacenamiento de archivos del resto del sistema, implementando un microservicio de almaceaniminto. Este microservicio podria encargarse de usar un proveedor en la nube para almacenamiento de objetos de cualquier tipo. 
+Una alternativa seria implementar el servicio on-premise, usando librerias como MinIO. En este caso, cada vez que se recibe un archivo, el microservicio lo sube al storage y retorna la URL publica, los metdadatos pueden guardarse en una base de datos NoSQL como MongoDB, facilitando busquedas rapidas. 
+Tambien se podria gaurdar directamente archivos binarios directamente en MongoDB usando base64.
+
+Para el envío de correo electrónico, se puede dsacoplar el proceso usando una cola de mensajes como RabbitMQ, que ya se utiliza en este sistema. Cada vez que una tarjeta es usada/emititda, el microservicio publica un evento en cola, podria existir un microservicio notivicaciones suscrito a estos eventos, y es el que se encarga de enviar el correo electronico usando proveedor SMTP como SendGrid o Amazon SES. Esto permite que el sistema sea más escalable y desacoplado, ya que el microservicio de notificaciones puede ser modificado o reemplazado sin afectar al resto del sistema.
+
 ## Estructura del Repositorio
 
 - `discovery-microservicio/` - Microservicio de descubrimiento (Eureka)
@@ -119,6 +127,38 @@ El frontend se desarrolla y ejecuta de forma independiente.
    Por defecto, corre en http://localhost:4200
 
 ---
+
+## Flujos de acceso al sistema
+### 1. Inicio del sistema
+   Al abrir el navegador en http://localhost:4200, el sistema te redirigirá automáticamente a la página de inicio de sesión.
+
+### 2. Registro de usuario
+   Si no tienes una cuenta, haz clic en Registrarse.
+   En la página de registro deberás ingresar:
+
+- Nombre de usuario
+
+- Correo electrónico válido
+
+- Contraseña
+
+### 3. Verificación y correo de confirmación
+   Al enviar el formulario de registro:
+
+- El sistema validará que la información sea correcta y que el correo no esté registrado.
+
+- Si todo es correcto, recibirás un correo electrónico con una contraseña aleatoria generada por el sistema.
+
+- Esta contraseña es temporal y deberás utilizarla para tu primer inicio de sesión.
+
+### 4. Inicio de sesión
+   Después de recibir el correo, vuelve a la página de inicio de sesión.
+   Ingresa tu nombre de usuario y la contraseña enviada por email para acceder al sistema.
+
+#### _Notas importantes_:
+
+- _Debes tener acceso al correo electrónico que registraste, ya que ahí recibirás la contraseña temporal._
+- _Por razones de seguridad, se recomienda cambiar la contraseña después del primer ingreso._
 
 ## Colección de Postman
 
